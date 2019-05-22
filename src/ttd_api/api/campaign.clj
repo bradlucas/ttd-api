@@ -6,7 +6,8 @@
 
 
 (defn build-campaign-body [advertiser-id]
-  (let [m {:headers {"TTD-AUTH" api/token}
+  (let [token (api/token)
+        m {:headers {"TTD-AUTH" token}
            :body (str "{\"AdvertiserId\": \"" advertiser-id "\"," "\"PageStartIndex\": \"0\", \"PageSize\": null}")
            :content-type :json
            :accept :json}]
