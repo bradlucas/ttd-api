@@ -4,7 +4,8 @@
 
 
 (defn build-ad-body [partner-id]
-  (let [m {:headers {"TTD-AUTH" api/token}
+  (let [token (api/token)
+        m {:headers {"TTD-AUTH" token}
            :body (str "{\"PartnerId\": \"" partner-id "\"," "\"PageStartIndex\": \"0\", \"PageSize\": null}")
            :content-type :json
            :accept :json}]
