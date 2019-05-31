@@ -9,7 +9,6 @@
            :body (str "{\"PartnerId\": \"" partner-id "\"," "\"PageStartIndex\": \"0\", \"PageSize\": null}")
            :content-type :json
            :accept :json}]
-    (clojure.pprint/pprint m)
     m))
 
 (defn get-advertisers [partner-id]
