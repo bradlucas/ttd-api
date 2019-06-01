@@ -11,7 +11,6 @@
            :body (str "{\"CampaignId\": \"" campaign-id "\"," "\"PageStartIndex\": \"0\", \"PageSize\": null}")
            :content-type :json
            :accept :json}]
-    (clojure.pprint/pprint m)
     m))
 
 (defn get-adgroups [campaign-id]

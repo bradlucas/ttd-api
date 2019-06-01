@@ -1,8 +1,6 @@
 (ns ttd-api.api.api
-  (:require [clojure.pprint]
-            [cheshire.core :as c]
-            [clojure.edn :as edn])
-  )
+  (:require [cheshire.core :as c]
+            [clojure.edn :as edn]))
 
 ;; Create a edn file called config.edn inside a directory called .ttd-api in your $HOME directory
 ;;
@@ -30,7 +28,6 @@
 
 (defn build-url [path]
   (let [s (str (root-url) path)]
-    (println s)
     s))
   
 (defn build-body []
@@ -38,6 +35,5 @@
            :body "{\"PageStartIndex\": \"0\", \"PageSize\": null}"
            :content-type :json
            :accept :json}]
-    (clojure.pprint/pprint m)
     m))
 
