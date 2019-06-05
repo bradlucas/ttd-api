@@ -1,5 +1,5 @@
 (ns ttd-api.api.campaign
-    (:require [clj-http.client :as client]
+    (:require [ttd-api.api.http :as http]
               [ttd-api.api.api :as api]
               [ttd-api.api.advertiser :as advertiser]
               [cheshire.core :as c]))
@@ -15,12 +15,12 @@
 
 (defn get-campaigns [advertiser-id]
   (-> (api/build-url "campaign/query/advertiser")
-      (client/post (build-campaign-body advertiser-id))
+      (http/post (build-campaign-body advertiser-id))
       :body))
 
 (defn get-campaign [campaign-id]
   (-> (str (api/build-url "campaign/") campaign-id)
-      (client/get (api/headers))
+      (http/get (api/headers))
       :body))
 
 (defn get-advertiser-from-campaign [campaign-json]
