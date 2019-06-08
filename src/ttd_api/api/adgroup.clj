@@ -1,5 +1,5 @@
 (ns ttd-api.api.adgroup
-    (:require [clj-http.client :as client]
+    (:require [ttd-api.api.http :as http]
               [ttd-api.api.api :as api]
               [ttd-api.api.campaign :as campaign]
               [cheshire.core :as c]))
@@ -15,12 +15,12 @@
 
 (defn get-adgroups [campaign-id]
   (-> (api/build-url "adgroup/query/campaign")
-      (client/post (build-adgroup-body campaign-id))
+      (http/post (build-adgroup-body campaign-id))
       :body))
 
 (defn get-adgroup [adgroup-id]
   (-> (str (api/build-url "adgroup/") adgroup-id)
-      (client/get (api/headers))
+      (http/get (api/headers))
       :body))
 
 (defn get-campaign-from-adgroup [adgroup-json]
