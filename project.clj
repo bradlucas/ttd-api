@@ -6,7 +6,8 @@
   
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [clj-http "3.10.0"]
-                 [cheshire "5.8.1"]]
+                 [cheshire "5.8.1"]
+                 [environ "1.1.0"]]
   
   :repl-options {:init-ns ttd-api.core}
 
