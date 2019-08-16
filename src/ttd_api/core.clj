@@ -1,6 +1,5 @@
 (ns ttd-api.core
-  (:require [ttd-api.api.api :as api]
-            [ttd-api.report :as report])
+  (:require [ttd-api.api.api :as api])
   (:gen-class))
 
 
