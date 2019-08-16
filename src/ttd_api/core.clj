@@ -1,5 +1,6 @@
 (ns ttd-api.core
-  (:require [ttd-api.api.api :as api])
+  (:require [ttd-api.api.api :as api]
+            [ttd-api.report :as report])
   (:gen-class))
 
 
@@ -7,7 +8,6 @@
   (println "ttd-api.core")
   (println (api/load-config))
   (println (api/root-url))
-  (println (api/token))
-  )
+  (println (api/token)))
   
 
