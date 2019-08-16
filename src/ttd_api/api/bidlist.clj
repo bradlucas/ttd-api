@@ -13,6 +13,6 @@
 
 (defn get-bidlists
   "run (c/parse-string (get-adgroup adgroup-id true) and pass here to get the bidlist ids"
-  [adgroup-id]
-  (map get-bidlist (map :BidListId (:AssociatedBidLists (c/parse-string (adgroup/get-adgroup adgroup-id) true)))))
+  [adgroup]
+  (map get-bidlist (adgroup/get-bidlist-ids adgroup)))
 
