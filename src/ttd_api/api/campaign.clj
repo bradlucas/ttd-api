@@ -1,8 +1,8 @@
 (ns ttd-api.api.campaign
-    (:require [ttd-api.api.http :as http]
+    (:require [cheshire.core :as c]
+              [ttd-api.api.http :as http]
               [ttd-api.api.api :as api]
-              [ttd-api.api.advertiser :as advertiser]
-              [cheshire.core :as c]))
+              [ttd-api.api.advertiser :as advertiser]))
 
 
 (defn build-campaign-body [advertiser-id]
@@ -16,14 +16,17 @@
 (defn get-campaigns [advertiser-id]
   (-> (api/build-url "campaign/query/advertiser")
       (http/post (build-campaign-body advertiser-id))
-      :body))
+      :body
+      (c/parse-string true)
+      :Result))
 
 (defn get-campaign [campaign-id]
   (-> (str (api/build-url "campaign/") campaign-id)
       (http/get (api/headers))
-      :body))
+      :body
+      (c/parse-string true)))
 
-(defn get-advertiser-from-campaign [campaign-json]
+(defn get-advertiser-from-campaign [campaign]
   ;; pull out advertiser-id
-  (let [advertiser-id (get-in (c/decode campaign-json) ["AdvertiserId"])]
+  (let [advertiser-id (:AdvertiserId campaign)]
     (advertiser/get-advertiser advertiser-id)))

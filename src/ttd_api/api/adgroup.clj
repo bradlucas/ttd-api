@@ -1,5 +1,6 @@
 (ns ttd-api.api.adgroup
-    (:require [ttd-api.api.http :as http]
+    (:require [cheshire.core :as c]
+              [ttd-api.api.http :as http]
               [ttd-api.api.api :as api]
               [ttd-api.api.campaign :as campaign]
               [cheshire.core :as c]))
@@ -16,16 +17,20 @@
 (defn get-adgroups [campaign-id]
   (-> (api/build-url "adgroup/query/campaign")
       (http/post (build-adgroup-body campaign-id))
-      :body))
+      :body
+      (c/parse-string true)
+      :Result))
 
 (defn get-adgroup [adgroup-id]
   (-> (str (api/build-url "adgroup/") adgroup-id)
       (http/get (api/headers))
-      :body))
+      :body
+      (c/parse-string true)))
 
-(defn get-campaign-from-adgroup [adgroup-json]
+(defn get-campaign-from-adgroup [adgroup]
   ;; pull out campaign-id
-  (let [campaign-id (get-in (c/decode adgroup-json) ["CampaignId"])]
+  (let [campaign-id (:CampaignId  adgroup)]
     (campaign/get-campaign campaign-id)))
 
-
+(defn get-bidlist-ids [adgroup]
+  (map :BidListId (:AssociatedBidLists adgroup)))

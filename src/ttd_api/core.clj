@@ -7,7 +7,6 @@
   (println "ttd-api.core")
   (println (api/load-config))
   (println (api/root-url))
-  (println (api/token))
-  )
+  (println (api/token)))
   
 

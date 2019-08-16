@@ -1,5 +1,6 @@
 (ns ttd-api.api.advertiser
-    (:require [ttd-api.api.http :as http]
+    (:require [cheshire.core :as c]
+              [ttd-api.api.http :as http]
               [ttd-api.api.api :as api]))
 
 
@@ -14,9 +15,12 @@
 (defn get-advertisers [partner-id]
   (-> (api/build-url "advertiser/query/partner")
       (http/post (build-ad-body partner-id))
-      :body))
+      :body
+      (c/parse-string true)
+      :Result))
 
 (defn get-advertiser [advertiser-id]
   (-> (str (api/build-url "advertiser/") advertiser-id)
       (http/get (api/headers))
-      :body))
+      :body
+      (c/parse-string true)))
